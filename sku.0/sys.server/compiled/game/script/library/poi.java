@@ -802,4 +802,173 @@ public class poi extends script.base_script
         }
         return poi.findObject(scenario.ANTAGONIST + "_" + rand(0, getIntObjVar(poiBaseObject, scenario.VAR_ANTAGONIST_COUNT) - 1));
     }
+
+    /**
+     * Builder class for POI object creation.
+     * Provides a fluent interface for creating POI objects with various configurations.
+     * 
+     * Example usage:
+     * <pre>
+     * obj_id npc = new PoiObjectBuilder(poiObject)
+     *     .withTemplate("object/mobile/npc.iff")
+     *     .withName("guard_1")
+     *     .withLevel(30)
+     *     .atPosition(10.0f, 5.0f)
+     *     .createNpc();
+     * </pre>
+     */
+    public static class PoiObjectBuilder
+    {
+        private obj_id poiObject;
+        private String template;
+        private String name;
+        private float x;
+        private float z;
+        private int level = -1;
+        private obj_id structure;
+        private String cellName;
+        private boolean isNpc = false;
+
+        /**
+         * Creates a new POI object builder.
+         * 
+         * @param poiObject The POI base object
+         */
+        public PoiObjectBuilder(obj_id poiObject)
+        {
+            this.poiObject = poiObject;
+        }
+
+        /**
+         * Sets the object template to create.
+         * 
+         * @param template The template path
+         * @return This builder for chaining
+         */
+        public PoiObjectBuilder withTemplate(String template)
+        {
+            this.template = template;
+            return this;
+        }
+
+        /**
+         * Sets the name identifier for the object.
+         * 
+         * @param name The name identifier
+         * @return This builder for chaining
+         */
+        public PoiObjectBuilder withName(String name)
+        {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Sets the spawn level for NPCs.
+         * 
+         * @param level The level (use -1 for default)
+         * @return This builder for chaining
+         */
+        public PoiObjectBuilder withLevel(int level)
+        {
+            this.level = level;
+            return this;
+        }
+
+        /**
+         * Sets the position for the object.
+         * 
+         * @param x The x coordinate offset
+         * @param z The z coordinate offset
+         * @return This builder for chaining
+         */
+        public PoiObjectBuilder atPosition(float x, float z)
+        {
+            this.x = x;
+            this.z = z;
+            return this;
+        }
+
+        /**
+         * Configures this to create an NPC.
+         * 
+         * @return This builder for chaining
+         */
+        public PoiObjectBuilder asNpc()
+        {
+            this.isNpc = true;
+            return this;
+        }
+
+        /**
+         * Creates the configured object.
+         * 
+         * @return The created object ID, or null if creation failed
+         * @throws InterruptedException if interrupted during creation
+         */
+        public obj_id create() throws InterruptedException
+        {
+            if (name != null && !name.isEmpty())
+            {
+                return createObject(poiObject, name, template, x, z, level);
+            }
+            return createObject(poiObject, template, x, z, level);
+        }
+
+        /**
+         * Creates the configured NPC.
+         * 
+         * @return The created NPC object ID, or null if creation failed
+         * @throws InterruptedException if interrupted during creation
+         */
+        public obj_id createNpc() throws InterruptedException
+        {
+            if (name != null && !name.isEmpty())
+            {
+                return poi.createNpc(poiObject, name, template, x, z, level);
+            }
+            return null;
+        }
+    }
+
+    /**
+     * Creates a new POI object builder for fluent object creation.
+     * 
+     * @param poiObject The POI base object
+     * @return A new builder instance
+     */
+    public static PoiObjectBuilder builder(obj_id poiObject)
+    {
+        return new PoiObjectBuilder(poiObject);
+    }
+
+    /**
+     * Validates if an obj_id is valid and not null.
+     * Provides a cleaner alternative to repeated null and NULL_ID checks.
+     * 
+     * @param objId The object ID to validate
+     * @return true if the object is valid and not null
+     */
+    public static boolean isValidObject(obj_id objId)
+    {
+        return objId != null && objId != obj_id.NULL_ID;
+    }
+
+    /**
+     * Gets the base object with validation.
+     * Returns null if the base object is invalid.
+     * 
+     * @param poiObject The POI object
+     * @return The base object, or null if invalid
+     * @throws InterruptedException if interrupted
+     */
+    public static obj_id getValidBaseObject(obj_id poiObject) throws InterruptedException
+    {
+        if (!isValidObject(poiObject))
+        {
+            return null;
+        }
+        obj_id baseObject = getObjIdObjVar(poiObject, POI_BASE_OBJECT);
+        return isValidObject(baseObject) ? baseObject : null;
+    }
 }
