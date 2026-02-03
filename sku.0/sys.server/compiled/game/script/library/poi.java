@@ -838,6 +838,16 @@ public class poi extends script.base_script
         {
             this.poiObject = poiObject;
         }
+        
+        /**
+         * Helper method to check if a name has been set.
+         * 
+         * @return true if name is not null and not empty
+         */
+        private boolean hasName()
+        {
+            return name != null && !name.isEmpty();
+        }
 
         /**
          * Sets the object template to create.
@@ -908,7 +918,7 @@ public class poi extends script.base_script
          */
         public obj_id create() throws InterruptedException
         {
-            if (name != null && !name.isEmpty())
+            if (hasName())
             {
                 return createObject(poiObject, name, template, x, z, level);
             }
@@ -923,7 +933,7 @@ public class poi extends script.base_script
          */
         public obj_id createNpc() throws InterruptedException
         {
-            if (name != null && !name.isEmpty())
+            if (hasName())
             {
                 return poi.createNpc(poiObject, name, template, x, z, level);
             }
@@ -969,6 +979,10 @@ public class poi extends script.base_script
             return null;
         }
         obj_id baseObject = getObjIdObjVar(poiObject, POI_BASE_OBJECT);
-        return isValidObject(baseObject) ? baseObject : null;
+        if (!isValidObject(baseObject))
+        {
+            return null;
+        }
+        return baseObject;
     }
 }
