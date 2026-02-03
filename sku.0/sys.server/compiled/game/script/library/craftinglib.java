@@ -1925,4 +1925,120 @@ public class craftinglib extends script.base_script
         }
         return false;
     }
+
+    /**
+     * Creates a single resource weight configuration for a crafting attribute.
+     * 
+     * @param attributeName The name of the crafting attribute (e.g., "minDamage", "maxDamage")
+     * @param resourceType The resource type constant from craftinglib (e.g., RESOURCE_CONDUCTIVITY)
+     * @param weight The weight value for this resource type
+     * @return A configured resource_weight object
+     */
+    public static resource_weight createResourceWeight(String attributeName, int resourceType, int weight)
+    {
+        return new resource_weight(attributeName, new resource_weight.weight[]
+        {
+            new resource_weight.weight(resourceType, weight)
+        });
+    }
+
+    /**
+     * Creates a resource weight configuration with two resource types.
+     * 
+     * @param attributeName The name of the crafting attribute
+     * @param resourceType1 First resource type constant
+     * @param weight1 Weight for the first resource type
+     * @param resourceType2 Second resource type constant
+     * @param weight2 Weight for the second resource type
+     * @return A configured resource_weight object
+     */
+    public static resource_weight createResourceWeight(String attributeName, int resourceType1, int weight1, int resourceType2, int weight2)
+    {
+        return new resource_weight(attributeName, new resource_weight.weight[]
+        {
+            new resource_weight.weight(resourceType1, weight1),
+            new resource_weight.weight(resourceType2, weight2)
+        });
+    }
+
+    /**
+     * Creates a resource weight configuration with multiple resource types.
+     * Provides a cleaner alternative to manually creating resource_weight.weight arrays.
+     * 
+     * @param attributeName The name of the crafting attribute
+     * @param weights Variable number of weight configurations
+     * @return A configured resource_weight object
+     */
+    public static resource_weight createResourceWeight(String attributeName, resource_weight.weight... weights)
+    {
+        return new resource_weight(attributeName, weights);
+    }
+
+    /**
+     * Creates an array of resource weights for common weapon attributes using the same resource configuration.
+     * This eliminates duplication when all attributes use the same resource types and weights.
+     * 
+     * @param attributeNames Array of attribute names to configure
+     * @param resourceType Single resource type constant
+     * @param weight Weight for the resource type
+     * @return Array of configured resource_weight objects
+     */
+    public static resource_weight[] createResourceWeights(String[] attributeNames, int resourceType, int weight)
+    {
+        resource_weight[] weights = new resource_weight[attributeNames.length];
+        for (int i = 0; i < attributeNames.length; i++)
+        {
+            weights[i] = createResourceWeight(attributeNames[i], resourceType, weight);
+        }
+        return weights;
+    }
+
+    /**
+     * Creates an array of resource weights using two resource types for all attributes.
+     * 
+     * @param attributeNames Array of attribute names
+     * @param resourceType1 First resource type constant
+     * @param weight1 Weight for first resource type
+     * @param resourceType2 Second resource type constant
+     * @param weight2 Weight for second resource type
+     * @return Array of configured resource_weight objects
+     */
+    public static resource_weight[] createResourceWeights(String[] attributeNames, int resourceType1, int weight1, int resourceType2, int weight2)
+    {
+        resource_weight[] weights = new resource_weight[attributeNames.length];
+        for (int i = 0; i < attributeNames.length; i++)
+        {
+            weights[i] = createResourceWeight(attributeNames[i], resourceType1, weight1, resourceType2, weight2);
+        }
+        return weights;
+    }
+
+    /**
+     * Common weapon attribute names for crafting configuration.
+     * Provides a standard set of attributes used by most weapon types.
+     */
+    public static final String[] COMMON_WEAPON_ATTRIBUTES = 
+    {
+        "minDamage",
+        "maxDamage",
+        "attackSpeed",
+        "woundChance",
+        "hitPoints",
+        "accuracy",
+        "elementalValue",
+        "attackCost"
+    };
+
+    /**
+     * Common lightsaber attribute names for crafting configuration.
+     */
+    public static final String[] LIGHTSABER_ATTRIBUTES = 
+    {
+        "minDamage",
+        "maxDamage",
+        "attackSpeed",
+        "woundChance",
+        "forceCost",
+        "attackCost"
+    };
 }

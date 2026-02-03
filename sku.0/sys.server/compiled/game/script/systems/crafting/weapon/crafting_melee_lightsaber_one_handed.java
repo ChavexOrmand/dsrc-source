@@ -39,33 +39,15 @@ public class crafting_melee_lightsaber_one_handed extends script.systems.craftin
         "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_s12.iff",
         "object/weapon/melee/sword/crafted_saber/shared_sword_lightsaber_one_handed_s13.iff"
     };
+    
+    // Refactored to use craftinglib utility method - eliminates code duplication
     public static final resource_weight[] OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES = 
-    {
-        new resource_weight("minDamage", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
-        }),
-        new resource_weight("maxDamage", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
-        }),
-        new resource_weight("attackSpeed", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
-        }),
-        new resource_weight("woundChance", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
-        }),
-        new resource_weight("forceCost", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
-        }),
-        new resource_weight("attackCost", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_SHOCK_RESIST, 1)
-        })
-    };
+        craftinglib.createResourceWeights(
+            craftinglib.LIGHTSABER_ATTRIBUTES,
+            craftinglib.RESOURCE_SHOCK_RESIST,
+            1
+        );
+    
     public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES = OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES;
     public String[] getRequiredSkills() throws InterruptedException
     {

@@ -17,6 +17,28 @@ public class terminal_items extends script.base_script
     public int OnInitialize(obj_id self) throws InterruptedException
     {
         createTriggerVolume(GET_QUEST_ITEM_VOLUME_NAME, 2.0f, true);
+        
+        // Initialize the disk objvar based on the terminal's shared template
+        if (!hasObjVar(self, "disk"))
+        {
+            String sharedTemplate = getTemplateName(self);
+            if (sharedTemplate != null)
+            {
+                if (sharedTemplate.contains("shared_terminal_bestine_quests_01"))
+                {
+                    setObjVar(self, "disk", "object/tangible/loot/quest/sean_questn_tdisk.iff");
+                }
+                else if (sharedTemplate.contains("shared_terminal_bestine_quests_02"))
+                {
+                    setObjVar(self, "disk", "object/tangible/loot/quest/victor_questp_jregistry.iff");
+                }
+                else if (sharedTemplate.contains("shared_terminal_bestine_quests_03"))
+                {
+                    setObjVar(self, "disk", "object/tangible/loot/quest/sean_history_disk.iff");
+                }
+            }
+        }
+        
         return SCRIPT_CONTINUE;
     }
     public int OnTriggerVolumeEntered(obj_id self, String volumeName, obj_id breacher) throws InterruptedException
