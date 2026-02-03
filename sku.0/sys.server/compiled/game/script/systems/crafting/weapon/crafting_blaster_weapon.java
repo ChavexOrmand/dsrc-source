@@ -22,92 +22,20 @@ public class crafting_blaster_weapon extends script.systems.crafting.weapon.craf
     {
         "weapon_experimentation"
     };
+    
+    // Refactored to use craftinglib utility method - reduces code from ~50 lines to ~5 lines
     public static final resource_weight[] OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES = 
-    {
-        new resource_weight("minDamage", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("maxDamage", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("attackSpeed", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("woundChance", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("hitPoints", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("accuracy", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("elementalValue", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("attackCost", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        })
-    };
-    public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES = 
-    {
-        new resource_weight("minDamage", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("maxDamage", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("attackSpeed", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("woundChance", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("hitPoints", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("accuracy", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("elementalValue", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        }),
-        new resource_weight("attackCost", new resource_weight.weight[]
-        {
-            new resource_weight.weight(craftinglib.RESOURCE_CONDUCTIVITY, 1),
-            new resource_weight.weight(craftinglib.RESOURCE_QUALITY, 1)
-        })
-    };
+        craftinglib.createResourceWeights(
+            craftinglib.COMMON_WEAPON_ATTRIBUTES,
+            craftinglib.RESOURCE_CONDUCTIVITY,
+            1,
+            craftinglib.RESOURCE_QUALITY,
+            1
+        );
+    
+    // Simplified: Both arrays use the same configuration
+    public static final resource_weight[] OBJ_MAX_ATTRIBUTE_RESOURCES = OBJ_ASSEMBLY_ATTRIBUTE_RESOURCES;
+    
     public String[] getRequiredSkills() throws InterruptedException
     {
         return REQUIRED_SKILLS;

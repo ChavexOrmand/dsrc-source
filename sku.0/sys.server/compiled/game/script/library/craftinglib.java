@@ -1934,7 +1934,7 @@ public class craftinglib extends script.base_script
      * @param weight The weight value for this resource type
      * @return A configured resource_weight object
      */
-    public static resource_weight createResourceWeight(String attributeName, int resourceType, int weight) throws InterruptedException
+    public static resource_weight createResourceWeight(String attributeName, int resourceType, int weight)
     {
         return new resource_weight(attributeName, new resource_weight.weight[]
         {
@@ -1952,7 +1952,7 @@ public class craftinglib extends script.base_script
      * @param weight2 Weight for the second resource type
      * @return A configured resource_weight object
      */
-    public static resource_weight createResourceWeight(String attributeName, int resourceType1, int weight1, int resourceType2, int weight2) throws InterruptedException
+    public static resource_weight createResourceWeight(String attributeName, int resourceType1, int weight1, int resourceType2, int weight2)
     {
         return new resource_weight(attributeName, new resource_weight.weight[]
         {
@@ -1969,7 +1969,7 @@ public class craftinglib extends script.base_script
      * @param weights Variable number of weight configurations
      * @return A configured resource_weight object
      */
-    public static resource_weight createResourceWeight(String attributeName, resource_weight.weight... weights) throws InterruptedException
+    public static resource_weight createResourceWeight(String attributeName, resource_weight.weight... weights)
     {
         return new resource_weight(attributeName, weights);
     }
@@ -1983,7 +1983,7 @@ public class craftinglib extends script.base_script
      * @param weight Weight for the resource type
      * @return Array of configured resource_weight objects
      */
-    public static resource_weight[] createResourceWeights(String[] attributeNames, int resourceType, int weight) throws InterruptedException
+    public static resource_weight[] createResourceWeights(String[] attributeNames, int resourceType, int weight)
     {
         resource_weight[] weights = new resource_weight[attributeNames.length];
         for (int i = 0; i < attributeNames.length; i++)
@@ -2003,7 +2003,7 @@ public class craftinglib extends script.base_script
      * @param weight2 Weight for second resource type
      * @return Array of configured resource_weight objects
      */
-    public static resource_weight[] createResourceWeights(String[] attributeNames, int resourceType1, int weight1, int resourceType2, int weight2) throws InterruptedException
+    public static resource_weight[] createResourceWeights(String[] attributeNames, int resourceType1, int weight1, int resourceType2, int weight2)
     {
         resource_weight[] weights = new resource_weight[attributeNames.length];
         for (int i = 0; i < attributeNames.length; i++)
